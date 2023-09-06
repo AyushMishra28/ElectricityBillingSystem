@@ -4,10 +4,14 @@ import java.util.*;
 class Customer {
     private String name;
     private int unitsConsumed;
+    private int CustomerID;
+    private String customerAdd;
 
-    public Customer(String name, int unitsConsumed) {
+    public Customer(String name, int unitsConsumed , int CustomerID , String customerAdd) {
         this.name = name;
         this.unitsConsumed = unitsConsumed;
+        this.CustomerID = CustomerID;
+        this.customerAdd = customerAdd;
     }
 
     public String getName() {
@@ -16,6 +20,14 @@ class Customer {
 
     public int getUnitsConsumed() {
         return unitsConsumed;
+    }
+    
+    public int getCustomerID() {
+        return CustomerID;
+    }
+    
+    public String getCustomerAddress() {
+        return customerAdd;
     }
 
 }
@@ -45,21 +57,30 @@ public class ElectricityBillingSystem {
         System.out.println("Welcome to the Electricity Billing System");
 
         // Customer registration
+        System.out.print("Enter customer ID: ");
+        int CustomerID = scanner.nextInt();
         System.out.print("Enter customer name: ");
-        String customerName = scanner.nextLine();
+        String CustomerName = scanner.nextLine();
+        String CustN = scanner.nextLine();
+        System.out.print("Enter customer Address: ");
+        String customerAdd = scanner.nextLine();
         System.out.print("Enter units consumed: ");
         int unitsConsumed = scanner.nextInt();
 
         // Create a customer object
-        Customer cust = new Customer(customerName, unitsConsumed);
+        Customer cust = new Customer(CustN, unitsConsumed, CustomerID , customerAdd);
 
         // Calculate the bill
         double billAmount = BillCalculator.calculateBill(cust.getUnitsConsumed());
 
         // Display the bill
-        System.out.println("\nCustomer Name: " + cust.getName());
-        System.out.println("Units Consumed: " + cust.getUnitsConsumed());
-        System.out.println("Bill Amount: Rs." + billAmount);
+        System.out.println("--------------------------------------");
+        System.out.println("| Customer ID: " + cust.getCustomerID() + "|" );
+        System.out.println("| Customer Name: " + cust.getName() + "|" );
+        System.out.println("| Customer Address: " + cust.getCustomerAddress() + "|" );
+        System.out.println("| Units Consumed: " + cust.getUnitsConsumed() + "|" );
+        System.out.println("| Bill Amount: Rs." + billAmount + "|" );
+        System.out.println("--------------------------------------");
 
         scanner.close();
     }
